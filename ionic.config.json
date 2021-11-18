@@ -1,0 +1,7 @@
+{
+  "name": "IonBitacoraGlt",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
