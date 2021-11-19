@@ -22,7 +22,127 @@
   </ion-header>
   
   <div id="container">
-    <strong class="capitalize"><!--Bitácora-->{{ folder }}</strong>
+    <ion-list *ngIf="personal">
+      <ion-item-sliding *ngFor="let personal of Personal" detail>
+        <!-- Pendiente para navegación a una pestaña que muestre los datos del personal -->
+        <!-- <ion-item (click)="listaSeleccionada ( lista )"> -->
+        <ion-item>
+          <ion-label>{{ personal.nombre }}</ion-label>
+          <!-- <ion-note slot="end" color="red">Elementos: {{ lista.items.length }}</ion-note> -->
+        </ion-item>
+
+        <ion-item-options side="end">
+          <!-- Cambiar función por borrar operador -->
+          <ion-item-option (click)="borrarLista( lista )" style="background-color: #eb445a;">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item-options side="start">
+          <!-- Cambiar opción por editar operador -->
+          <ion-item-option (click)="editarNombreLista( lista )">
+            <ion-icon name="create" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngIf="arneses">
+      <ion-item-sliding *ngFor="let arneses of Arneses" detail>
+        <!-- Pendiente para navegación a una pestaña que muestre los datos del personal -->
+        <!-- <ion-item (click)="listaSeleccionada ( lista )"> -->
+        <ion-item>
+          <ion-label>{{ arneses.ARN }}</ion-label>
+          <!-- <ion-note slot="end" color="red">Elementos: {{ lista.items.length }}</ion-note> -->
+        </ion-item>
+  
+        <ion-item-options side="end">
+          <!-- Cambiar función por borrar operador -->
+          <ion-item-option (click)="borrarLista( lista )" style="background-color: #eb445a;">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item-options side="start">
+          <!-- Cambiar opción por editar operador -->
+          <ion-item-option (click)="editarNombreLista( lista )">
+            <ion-icon name="create" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngIf="mo">
+      <ion-item-sliding *ngFor="let mo of MO" detail>
+        <!-- Pendiente para navegación a una pestaña que muestre los datos del personal -->
+        <!-- <ion-item (click)="listaSeleccionada ( lista )"> -->
+        <ion-item>
+          <ion-label>{{ mo.MO }}</ion-label>
+          <!-- <ion-note slot="end" color="red">Elementos: {{ lista.items.length }}</ion-note> -->
+        </ion-item>
+  
+        <ion-item-options side="end">
+          <!-- Cambiar función por borrar operador -->
+          <ion-item-option (click)="borrarLista( lista )" style="background-color: #eb445a;">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item-options side="start">
+          <!-- Cambiar opción por editar operador -->
+          <ion-item-option (click)="editarNombreLista( lista )">
+            <ion-icon name="create" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngIf="actividades">
+      <ion-item-sliding *ngFor="let actividades of Actividades" detail>
+        <!-- Pendiente para navegación a una pestaña que muestre los datos del personal -->
+        <!-- <ion-item (click)="listaSeleccionada ( lista )"> -->
+        <ion-item>
+          <ion-label>{{ actividades }}</ion-label>
+          <!-- <ion-note slot="end" color="red">Elementos: {{ lista.items.length }}</ion-note> -->
+        </ion-item>
+  
+        <ion-item-options side="end">
+          <!-- Cambiar función por borrar operador -->
+          <ion-item-option (click)="borrarLista( lista )" style="background-color: #eb445a;">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item-options side="start">
+          <!-- Cambiar opción por editar operador -->
+          <ion-item-option (click)="editarNombreLista( lista )">
+            <ion-icon name="create" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <ion-list *ngIf="registros">
+      <ion-item-sliding *ngFor="let registros of Registros" detail>
+        <!-- Pendiente para navegación a una pestaña que muestre los datos del personal -->
+        <!-- <ion-item (click)="listaSeleccionada ( lista )"> -->
+        <ion-item>
+          <ion-label>{{ registros.nombre }} {{ registros.fecha }}</ion-label>
+          <!-- <ion-note slot="end" color="red">Elementos: {{ lista.items.length }}</ion-note> -->
+        </ion-item>
+  
+        <ion-item-options side="end">
+          <!-- Cambiar función por borrar operador -->
+          <ion-item-option (click)="borrarLista( lista )" style="background-color: #eb445a;">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item-options side="start">
+          <!-- Cambiar opción por editar operador -->
+          <ion-item-option (click)="editarNombreLista( lista )">
+            <ion-icon name="create" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  
+    <!-- <strong class="capitalize">Bitácora{{ folder }}</strong> -->
     <!--<p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>-->
   </div>
 
