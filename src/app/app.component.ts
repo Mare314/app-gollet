@@ -9,7 +9,7 @@ export class AppComponent {
     { title: 'Personal', url: '/folder/Personal', icon: 'person' },
     { title: 'Arneses', url: '/folder/Arneses', icon: 'extension-puzzle' },
     { title: 'MO', url: '/folder/MO', icon: 'newspaper' },
-    { title: 'Actividades', url: '/folder/Actividades', icon: 'pencil' },
+    // { title: 'Actividades', url: '/folder/Actividades', icon: 'pencil' },
     { title: 'Registros', url: '/folder/Registros', icon: 'bar-chart' },
     /*{ title: 'Archived', url: '/folder/Archived', icon: 'archive' },
     { title: 'Trash', url: '/folder/Trash', icon: 'trash' },

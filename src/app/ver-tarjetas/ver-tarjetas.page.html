@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalles del operador  </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <!-- <ion-card-subtitle>{{ Tarjeta.estado ? "Activo" : "Baja" }}</ion-card-subtitle> -->
+      <ion-card-title>{{ Tarjeta.nombre }}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Estado: {{ Tarjeta.estado ? "Activo" : "Baja" }}
+      <br>
+      ID: {{ Tarjeta.uid }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

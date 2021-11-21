@@ -1,49 +1,40 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" slot="fixed">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>{{ folder }}</ion-title>
-    <!--<ion-thumbnail slot="end">
-      <ion-img [src]="src/assets/img/logo.jpeg"></ion-img>
-    </ion-thumbnail>-->
     <ion-img slot = end style="width: 40%; padding: 1%;" src="../../assets/img/logo.jpeg"></ion-img>
   </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
   <!-- Barra de búsqueda -->
   <ion-searchbar showCancelButton="never" placeholder="Búsqueda" animated></ion-searchbar>
   <!-- /Barra de búsqueda -->
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
+</ion-header>
+
+<ion-content>
   <div id="container">
     <ion-list *ngIf="personal">
-      <ion-item-sliding *ngFor="let personal of Personal" detail>
-        <!-- Pendiente para navegación a una pestaña que muestre los datos del personal -->
-        <!-- <ion-item (click)="listaSeleccionada ( lista )"> -->
-        <ion-item>
-          <ion-label>{{ personal.nombre }}</ion-label>
-          <!-- <ion-note slot="end" color="red">Elementos: {{ lista.items.length }}</ion-note> -->
-        </ion-item>
-
-        <ion-item-options side="end">
-          <!-- Cambiar función por borrar operador -->
-          <ion-item-option (click)="borrarLista( lista )" style="background-color: #eb445a;">
-            <ion-icon name="trash" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-        <ion-item-options side="start">
-          <!-- Cambiar opción por editar operador -->
-          <ion-item-option (click)="editarNombreLista( lista )">
-            <ion-icon name="create" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
+      <ion-card>
+        <ion-item-sliding *ngFor="let personal of Personal">
+          <ion-item>
+            <ion-icon name="person" slot="start"></ion-icon>
+            <ion-label>{{ personal.nombre }}</ion-label>
+            <ion-button fill="outline" slot="end" (click)="verTarjetas(personal.uid)">Ver</ion-button>
+          </ion-item>
+  
+          <ion-item-options side="end">
+            <!-- Cambiar función por borrar operador -->
+            <ion-item-option (click)="eliminarOperador( personal.uid )" style="background-color: #eb445a;">
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+          <ion-item-options side="start">
+            <ion-item-option (click)="editarOperador( personal )">
+              <ion-icon name="create" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-card>
     </ion-list>
 
     <ion-list *ngIf="arneses">
@@ -148,7 +139,7 @@
 
   <!-- Fab -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
+    <ion-fab-button (click)="agregar(folder)">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

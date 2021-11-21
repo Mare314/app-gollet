@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Personal } from '../models/personal.model';
 // import { HTTP } from '@ionic-native/http/ngx';
 
 @Injectable({
@@ -7,45 +8,76 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiGolletService {
   
-  // constructor( private http: HTTP ) { 
-  //   console.log( 'api-gollet listo.' );
-  // }
+  personal: any[] = [];
 
   constructor( private http: HttpClient ) { 
     console.log( 'api-gollet listo.' );
   }
 
   getPersonal() {
-    return this.http.get( 'https://gollet-electronics.herokuapp.com/api/personal' );
+    return this.http.get( 'https://gollet-electronics.herokuapp.com/api/personal/?limite=' );
+  }
+
+  putPersonal( personal: any ) {
+    return this.http.put( `https://gollet-electronics.herokuapp.com/api/personal/${ personal.uid }`, personal );
+  }
+
+  postPersonal( personal: any ) {
+    return this.http.post( 'https://gollet-electronics.herokuapp.com/api/personal', personal );
+  }
+
+  deletePersonal( id: string ) {
+    return this.http.delete( `https://gollet-electronics.herokuapp.com/api/personal/${ id }` );
   }
 
   getArneses() {
     return this.http.get( 'https://gollet-electronics.herokuapp.com/api/arneses' );
   }
 
+  putArneses( arnes: any ) {
+    return this.http.put( `https://gollet-electronics.herokuapp.com/api/arneses/${ arnes.uid }`, arnes );
+  }
+
+  postArneses( arnes: any ) {
+    return this.http.post( 'https://gollet-electronics.herokuapp.com/api/arneses', arnes );
+  }
+
   getMO() {
     return this.http.get( 'https://gollet-electronics.herokuapp.com/api/mo' );
   }
 
-  getActividades() {
-    // return this.http.get( 'https://gollet-electronics.herokuapp.com/api/' );
+  putMO( MO: any ) {
+    return this.http.put( `https://gollet-electronics.herokuapp.com/api/mo/${ MO.uid }`, MO );
   }
+
+  postMO( MO: any ) {
+    return this.http.post( 'https://gollet-electronics.herokuapp.com/api/mo', MO );
+  }
+
+  // getActividades() {
+  //   return this.http.get( 'https://gollet-electronics.herokuapp.com/api/' );
+  // }
 
   getRegistros() {
     return this.http.get( 'https://gollet-electronics.herokuapp.com/api/registro' );
   }
+
+  putRegistros( registro: any ) {
+    return this.http.put( `https://gollet-electronics.herokuapp.com/api/registro/${ registro.uid }`, registro );
+  }
+
+  postRegistros( registro: any ) {
+    return this.http.post( 'https://gollet-electronics.herokuapp.com/api/registro', registro );
+  }
   
-  // getPersonal() {
-  //   this.http.get( 'https://gollet-electronics.herokuapp.com/api/personal', {}, {} )
-  //       .then( data => {
-  //         console.log( data.status );
-  //         console.log( data.data );
-  //         console.log( data.headers );
-  //       } )
-  //       .catch( error => {
-  //         console.log( error.status );
-  //         console.log( error.error );
-  //         console.log( error.headers );
+  // obtenerOperador( id: string ) {
+  //   this.getPersonal()
+  //       .subscribe( ( data: any ) => {
+  //         data.personal.find( personalData => personalData.uid == id );
   //       } );
+
+  //   // console.log(this.personal);
+
+  //   // return this.personal.find( personalData => personalData.uid === id );
   // }
 }
