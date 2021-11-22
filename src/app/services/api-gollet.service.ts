@@ -42,6 +42,10 @@ export class ApiGolletService {
     return this.http.post( 'https://gollet-electronics.herokuapp.com/api/arneses', arnes );
   }
 
+  deleteArneses( id: string ) {
+    return this.http.delete( `https://gollet-electronics.herokuapp.com/api/arneses/${ id }` );
+  }
+
   getMO() {
     return this.http.get( 'https://gollet-electronics.herokuapp.com/api/mo' );
   }
@@ -52,6 +56,10 @@ export class ApiGolletService {
 
   postMO( MO: any ) {
     return this.http.post( 'https://gollet-electronics.herokuapp.com/api/mo', MO );
+  }
+
+  deleteMO( id: string ) {
+    return this.http.delete( `https://gollet-electronics.herokuapp.com/api/mo/${ id }` );
   }
 
   // getActividades() {
@@ -68,6 +76,10 @@ export class ApiGolletService {
 
   postRegistros( registro: any ) {
     return this.http.post( 'https://gollet-electronics.herokuapp.com/api/registro', registro );
+  }
+
+  deleteRegistros( id: string ) {
+    return this.http.delete( `https://gollet-electronics.herokuapp.com/api/registro/${ id }` );
   }
   
   // obtenerOperador( id: string ) {

@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
-    path: 'ver-tarjetas/:tarjetaId',
+    path: 'ver-tarjetas/:tarjetaId/:folder',
     loadChildren: () => import('./ver-tarjetas/ver-tarjetas.module').then( m => m.VerTarjetasPageModule)
   }
 ];

@@ -7,7 +7,7 @@
     <ion-img slot = end style="width: 40%; padding: 1%;" src="../../assets/img/logo.jpeg"></ion-img>
   </ion-toolbar>
   <!-- Barra de búsqueda -->
-  <ion-searchbar showCancelButton="never" placeholder="Búsqueda" animated></ion-searchbar>
+  <ion-searchbar #termino showCancelButton="never" placeholder="Buscar" animated (ionInput)="buscar(folder, termino.value)"></ion-searchbar>
   <!-- /Barra de búsqueda -->
 </ion-header>
 
@@ -19,7 +19,7 @@
           <ion-item>
             <ion-icon name="person" slot="start"></ion-icon>
             <ion-label>{{ personal.nombre }}</ion-label>
-            <ion-button fill="outline" slot="end" (click)="verTarjetas(personal.uid)">Ver</ion-button>
+            <ion-button fill="outline" slot="end" (click)="verTarjetas( personal.uid, folder )">Ver</ion-button>
           </ion-item>
   
           <ion-item-options side="end">
@@ -38,99 +38,75 @@
     </ion-list>
 
     <ion-list *ngIf="arneses">
-      <ion-item-sliding *ngFor="let arneses of Arneses" detail>
-        <!-- Pendiente para navegación a una pestaña que muestre los datos del personal -->
-        <!-- <ion-item (click)="listaSeleccionada ( lista )"> -->
-        <ion-item>
-          <ion-label>{{ arneses.ARN }}</ion-label>
-          <!-- <ion-note slot="end" color="red">Elementos: {{ lista.items.length }}</ion-note> -->
-        </ion-item>
+      <ion-card>
+        <ion-item-sliding *ngFor="let arnes of Arneses">
+          <ion-item>
+            <ion-icon name="extension-puzzle" slot="start"></ion-icon>
+            <ion-label>{{ arnes.ARN }}</ion-label>
+            <ion-button fill="outline" slot="end" (click)="verTarjetas( arnes.uid, folder )">Ver</ion-button>
+          </ion-item>
   
-        <ion-item-options side="end">
-          <!-- Cambiar función por borrar operador -->
-          <ion-item-option (click)="borrarLista( lista )" style="background-color: #eb445a;">
-            <ion-icon name="trash" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-        <ion-item-options side="start">
-          <!-- Cambiar opción por editar operador -->
-          <ion-item-option (click)="editarNombreLista( lista )">
-            <ion-icon name="create" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
+          <ion-item-options side="end">
+            <!-- Cambiar función por borrar operador -->
+            <ion-item-option (click)="eliminarArnes( arnes.uid )" style="background-color: #eb445a;">
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+          <ion-item-options side="start">
+            <ion-item-option (click)="editarArnes( arnes )">
+              <ion-icon name="create" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-card>
     </ion-list>
 
     <ion-list *ngIf="mo">
-      <ion-item-sliding *ngFor="let mo of MO" detail>
-        <!-- Pendiente para navegación a una pestaña que muestre los datos del personal -->
-        <!-- <ion-item (click)="listaSeleccionada ( lista )"> -->
-        <ion-item>
-          <ion-label>{{ mo.MO }}</ion-label>
-          <!-- <ion-note slot="end" color="red">Elementos: {{ lista.items.length }}</ion-note> -->
-        </ion-item>
+      <ion-card>
+        <ion-item-sliding *ngFor="let mo of MO">
+          <ion-item>
+            <ion-icon name="newspaper" slot="start"></ion-icon>
+            <ion-label>{{ mo.MO }}</ion-label>
+            <ion-button fill="outline" slot="end" (click)="verTarjetas( mo.uid, folder )">Ver</ion-button>
+          </ion-item>
   
-        <ion-item-options side="end">
-          <!-- Cambiar función por borrar operador -->
-          <ion-item-option (click)="borrarLista( lista )" style="background-color: #eb445a;">
-            <ion-icon name="trash" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-        <ion-item-options side="start">
-          <!-- Cambiar opción por editar operador -->
-          <ion-item-option (click)="editarNombreLista( lista )">
-            <ion-icon name="create" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
-
-    <ion-list *ngIf="actividades">
-      <ion-item-sliding *ngFor="let actividades of Actividades" detail>
-        <!-- Pendiente para navegación a una pestaña que muestre los datos del personal -->
-        <!-- <ion-item (click)="listaSeleccionada ( lista )"> -->
-        <ion-item>
-          <ion-label>{{ actividades }}</ion-label>
-          <!-- <ion-note slot="end" color="red">Elementos: {{ lista.items.length }}</ion-note> -->
-        </ion-item>
-  
-        <ion-item-options side="end">
-          <!-- Cambiar función por borrar operador -->
-          <ion-item-option (click)="borrarLista( lista )" style="background-color: #eb445a;">
-            <ion-icon name="trash" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-        <ion-item-options side="start">
-          <!-- Cambiar opción por editar operador -->
-          <ion-item-option (click)="editarNombreLista( lista )">
-            <ion-icon name="create" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
+          <ion-item-options side="end">
+            <!-- Cambiar función por borrar operador -->
+            <ion-item-option (click)="eliminarMO( mo.uid )" style="background-color: #eb445a;">
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+          <ion-item-options side="start">
+            <ion-item-option (click)="editarMO( mo )">
+              <ion-icon name="create" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-card>
     </ion-list>
 
     <ion-list *ngIf="registros">
-      <ion-item-sliding *ngFor="let registros of Registros" detail>
-        <!-- Pendiente para navegación a una pestaña que muestre los datos del personal -->
-        <!-- <ion-item (click)="listaSeleccionada ( lista )"> -->
-        <ion-item>
-          <ion-label>{{ registros.nombre }} {{ registros.fecha }}</ion-label>
-          <!-- <ion-note slot="end" color="red">Elementos: {{ lista.items.length }}</ion-note> -->
-        </ion-item>
+      <ion-card>
+        <ion-item-sliding *ngFor="let registros of Registros">
+          <ion-item>
+            <ion-icon name="bar-chart" slot="start"></ion-icon>
+            <ion-label>{{ registros.actividad }} | {{ registros.nombre }}</ion-label>
+            <ion-button fill="outline" slot="end" (click)="verTarjetas( registros.uid, folder )">Ver</ion-button>
+          </ion-item>
   
-        <ion-item-options side="end">
-          <!-- Cambiar función por borrar operador -->
-          <ion-item-option (click)="borrarLista( lista )" style="background-color: #eb445a;">
-            <ion-icon name="trash" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-        <ion-item-options side="start">
-          <!-- Cambiar opción por editar operador -->
-          <ion-item-option (click)="editarNombreLista( lista )">
-            <ion-icon name="create" slot="icon-only"></ion-icon>
-          </ion-item-option>
-        </ion-item-options>
-      </ion-item-sliding>
+          <ion-item-options side="end">
+            <!-- Cambiar función por borrar operador -->
+            <ion-item-option (click)="eliminarRegistro( registros.uid )" style="background-color: #eb445a;">
+              <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+          <ion-item-options side="start">
+            <ion-item-option (click)="editarRegistro( registros )">
+              <ion-icon name="create" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-card>
     </ion-list>
   
     <!-- <strong class="capitalize">Bitácora{{ folder }}</strong> -->
