@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Arnes } from '../models/arnes.model';
+import { Mo } from '../models/mo.model';
+import { Personal } from '../models/personal.model';
+import { Registro } from '../models/registro.model';
 import { ApiGolletService } from '../services/api-gollet.service';
 
 @Component({
@@ -8,30 +12,28 @@ import { ApiGolletService } from '../services/api-gollet.service';
   styleUrls: ['./ver-tarjetas.page.scss'],
 })
 export class VerTarjetasPage implements OnInit {
-  Personal: any[] = [];
-  Arneses: any[] = [];
-  MO: any[] = [];
-  Actividades: any[] = [];
-  Registros: any[] = [];
-  Tarjeta: any[] = [];
+  personal: Personal;
+  arneses: Arnes;
+  mo: Mo;
+  registros: Registro;
+  // Tarjeta: any[] = [];
 
-  personal = false;
-  arneses = false;
-  mo = false;
-  actividades = false;
-  registros =  false;
+  blnPersonal = false;
+  blnArneses = false;
+  blnMo = false;
+  blnRegistros =  false;
   folder = '';
 
   constructor(private apiGollet: ApiGolletService,
               private route: ActivatedRoute) {
     const ID = this.route.snapshot.paramMap.get( 'tarjetaId' );
-    const FOLDER = this.route.snapshot.paramMap.get( 'folder' )
+    const FOLDER = this.route.snapshot.paramMap.get( 'folder' );
 
     this.folder = FOLDER;
 
     switch( FOLDER ) {
       case 'Personal':
-        this.obtenerOperador( ID );        
+        this.obtenerOperador( ID );
       break;
       case 'Arneses':
         this.obtenerArnes( ID );
@@ -47,68 +49,53 @@ export class VerTarjetasPage implements OnInit {
         return;
     }
     
-    
-    // this.id = PERSONAL_ID;
-    
-    // apiGollet.getPersonal()
-    //     .subscribe( ( data: any ) => {
-      //       // console.log( data.personal );
-      //       this.Personal = data.personal;
-      //       // console.log( this.Personal );
-      //       this.Tarjeta = this.Personal.find( personalData => personalData.uid === PERSONAL_ID );
-      //     } );
     }
     
     ngOnInit() {
-      this.folder == 'Personal' ? this.personal = true : this.personal = false;
-      this.folder == 'Arneses' ? this.arneses = true : this.arneses = false;
-      this.folder == 'MO' ? this.mo = true : this.mo = false;
-      this.folder == 'Actividades' ? this.actividades = true : this.actividades = false;
-      this.folder == 'Registros' ? this.registros = true : this.registros = false;
+      this.folder === 'Personal' ? this.blnPersonal = true : this.blnPersonal = false;
+      this.folder === 'Arneses' ? this.blnArneses = true : this.blnArneses = false;
+      this.folder === 'MO' ? this.blnMo = true : this.blnMo = false;
+      this.folder === 'Registros' ? this.blnRegistros = true : this.blnRegistros = false;
     }
 
   obtenerOperador( id: string ) {
+    let personal:  Personal[] = [];
     this.apiGollet.getPersonal()
         .subscribe( ( data: any ) => {
-          // console.log( data.personal );
-          this.Personal = data.personal;
-          // console.log( this.Personal );
-          this.Tarjeta = this.Personal.find( personalData => personalData.uid === id );
+          personal = data.personal;
+          this.personal = personal.find( personalData => personalData.uid === id );
         } );
-    return this.Tarjeta;
+      return true;
   }
 
   obtenerArnes( id: string ) {
+    let arnes: Arnes[] = [];
     this.apiGollet.getArneses()
         .subscribe( ( data: any ) => {
-          console.log( data );
-          this.Arneses = data.arneses;
-          // console.log( this.Personal );
-          this.Tarjeta = this.Arneses.find( arnesData => arnesData.uid === id );
+          arnes = data.arneses;
+          this.arneses = arnes.find( arnesData => arnesData.uid === id );
         } );
-    return this.Tarjeta;
+    return true
   }
 
   obtenerMO( id: string ) {
+    let mo: Mo[] = [];
     this.apiGollet.getMO()
         .subscribe( ( data: any ) => {
-          console.log( data );
-          this.MO = data.MOs;
-          // console.log( this.Personal );
-          this.Tarjeta = this.MO.find( moData => moData.uid === id );
+          mo = data.MOs;
+          this.mo = mo.find( moData => moData.uid === id );
         } );
-    return this.Tarjeta;
+    return true;
   }
 
   obtenerRegistro( id: string ) {
+    let registro: Registro[] = [];
     this.apiGollet.getRegistros()
         .subscribe( ( data: any ) => {
-          console.log( data.Registros );
-          this.Registros = data.Registros;
-          // console.log( this.Personal );
-          this.Tarjeta = this.Registros.find( regData => regData.uid === id );
+          registro = data.Registros;
+          this.registros = registro.find( regData => regData.uid === id );
         } );
-    return this.Tarjeta;
+    return true;
   }
 
 }

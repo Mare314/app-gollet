@@ -1,70 +1,69 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/" ></ion-back-button>
-    </ion-buttons>
-    <ion-title>Detalles del operador  </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Detalles del operador </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngIf="personal">
-    <ion-card-header>
-      <!-- <ion-card-subtitle>{{ Tarjeta.estado ? "Activo" : "Baja" }}</ion-card-subtitle> -->
-      <ion-card-title>{{ Tarjeta.nombre }}</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      Estado: {{ Tarjeta.estado ? "Activo" : "Baja" }}
-      <br>
-      ID: {{ Tarjeta.uid }}
-    </ion-card-content>
-  </ion-card>
+    <ion-card *ngIf="blnPersonal">
+        <ng-container *ngIf="personal">
+            <ion-card-header>
+                <!-- <ion-card-subtitle>{{ Tarjeta.estado ? "Activo" : "Baja" }}</ion-card-subtitle> -->
+                <ion-card-title>{{ personal.nombre }}</ion-card-title>
+            </ion-card-header>
 
-  <ion-card *ngIf="arneses">
-    <ion-card-header>
-      <ion-card-title>{{ Tarjeta.ARN }}</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      Cliente: {{ Tarjeta.cliente }}
-      <br>
-      ID: {{ Tarjeta.uid }}
-    </ion-card-content>
-  </ion-card>
+            <ion-card-content>
+                Estado: {{ personal.estado ? "Activo" : "Baja" }}
+                <br> ID: {{ personal.uid }}
+            </ion-card-content>
+        </ng-container>
+    </ion-card>
 
-  <ion-card *ngIf="mo">
-    <ion-card-header>
-      <ion-card-title>{{ Tarjeta.MO }}</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-      Arnés: {{ Tarjeta.arnes }}
-      <br>
-      Cliente: {{ Tarjeta.cliente }}
-      <br>
-      ID: {{ Tarjeta.uid }}
-    </ion-card-content>
-  </ion-card>
+    <ion-card *ngIf="blnArneses">
+        <ng-container *ngIf="arneses">
+            <ion-card-header>
+                <ion-card-title>{{ arneses.ARN }}</ion-card-title>
+            </ion-card-header>
 
-  <ion-card *ngIf="registros">
-    <ion-card-header>
-      <ion-card-title>{{ Tarjeta.actividad | uppercase }}</ion-card-title>
-      <ion-card-subtitle>cantidad: {{ Tarjeta.cantidad }}</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content>
-      Fecha: {{ Tarjeta.fecha | date: 'dd/MM/YYYY' }}
-      <br>
-      Hora de inicio: {{ Tarjeta.inicio }}
-      <br>
-      Hora de finalización: {{ Tarjeta.fin }}
-      <br>
-      Arnés: {{ Tarjeta.arnes }}
-      <br>
-      MO: {{ Tarjeta.mo }}
-      <br>
-      Operador: {{ Tarjeta.nombre }}
-    </ion-card-content>
-  </ion-card>
+            <ion-card-content>
+                Cliente: {{ arneses.cliente }}
+                <br> ID: {{ arneses.uid }}
+            </ion-card-content>
+        </ng-container>
+    </ion-card>
+
+    <ion-card *ngIf="blnMo">
+        <ng-container *ngIf="mo">
+            <ion-card-header>
+                <ion-card-title>{{ mo.MO }}</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+                Arnés: {{ mo.arnes }}
+                <br> Cliente: {{ mo.cliente }}
+                <br> ID: {{ mo.uid }}
+            </ion-card-content>
+        </ng-container>
+    </ion-card>
+
+    <ion-card *ngIf="blnRegistros">
+        <ng-container *ngIf="registros">
+            <ion-card-header>
+                <ion-card-title>{{ registros.actividad | uppercase }}</ion-card-title>
+                <ion-card-subtitle>cantidad: {{ registros.cantidad }}</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+                Fecha: {{ registros.fecha | date: 'dd/MM/YYYY' }}
+                <br> Hora de inicio: {{ registros.inicio }}
+                <br> Hora de finalización: {{ registros.fin }}
+                <br> Arnés: {{ registros.arnes }}
+                <br> MO: {{ registros.mo }}
+                <br> Operador: {{ registros.nombre }}
+            </ion-card-content>
+        </ng-container>
+    </ion-card>
 </ion-content>
